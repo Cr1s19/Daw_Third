@@ -33,4 +33,42 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('welcome_message');
 	}
+    public function directions()
+    {
+     $this->load->library("googlemaps");
+     $config["center"] = "37.4419, -122.1419";
+     $config["zoom"] = "auto";
+     $config["directions"] = TRUE;
+     $config["directionsStart"] = "empire state building";
+     $config["directionsEnd"] = "statue of liberty";
+     $config["directionsDivID"] = "directionsDiv";
+     $this->googlemaps->initialize($config);
+     $data["map"] = $this->googlemaps->create_map();
+
+     $this->load->view("directions", $data);
+    }
+    
+    public function geolocation()
+    {
+      $this->load->library("googlemaps");
+
+      $config = array();
+      $config["center"] = "auto";
+      $config["onboundschanged"] = "if (!centreGot) {
+      var mapCentre = map.getCenter();
+      marker_0.setOptions({
+      position: new google.maps.LatLng(mapCentre.lat(),      mapCentre.lng()) 
+      });
+      }
+      centreGot = true;";
+      $this->googlemaps->initialize($config);
+
+      // set up the marker ready for positioning 
+      // once we know the users location
+      $marker = array();
+      $this->googlemaps->add_marker($marker);
+      $data["map"] = $this->googlemaps->create_map();
+
+      $this->load->view("geolocation", $data);
+     }
 }
