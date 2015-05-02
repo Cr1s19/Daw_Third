@@ -20,19 +20,16 @@ class Welcome extends CI_Controller {
 	 */
     public function marker(){
         $this->load->library("googlemaps");
-<<<<<<< HEAD
         $config["center"] = "20.596202, -100.403871";
         $config["zoom"] = "auto";
         $this->googlemaps->initialize($config);
         $marker = array();
         $marker["position"] = "20.596202, -100.403871";
-=======
         $config["center"] = "20.613051, -100.405856";
         $config["zoom"] = "auto";
         $this->googlemaps->initialize($config);
         $marker = array();
         $marker["position"] = "20.613051, -100.405856";
->>>>>>> b6ea6e1d436de3a80c51d1c2857fc53711dd1e4a
         $this->googlemaps->add_marker($marker);
         $data["map"] = $this->googlemaps->create_map();
         $this->load->view("marker", $data);
