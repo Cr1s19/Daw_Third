@@ -34,11 +34,14 @@ class Welcome extends CI_Controller {
         $data["map"] = $this->googlemaps->create_map();
         $this->load->view("marker", $data);
     }
+<<<<<<< Updated upstream
 	public function index()
 	{
 		$this->load->view('welcome_message');
 	}
     
+=======
+>>>>>>> Stashed changes
     public function directions()
     {
      $this->load->library("googlemaps");
@@ -75,13 +78,13 @@ class Welcome extends CI_Controller {
       $this->googlemaps->add_marker($marker);
       
       $config["styles"] = array(
-    array("name"=>"Red Parks", "definition"=>array(
+    array("name"=>"Purple Parks", "definition"=>array(
     array("featureType"=>"all", "stylers"=>array(array("saturation"=>"-30"))),
-    array("featureType"=>"poi.park", "stylers"=>array(array("saturation"=>"10"), array("hue"=>"#990000")))
+    array("featureType"=>"poi.park", "stylers"=>array(array("saturation"=>"10"), array("hue"=>"#4F0A95")))
   )),
   array("name"=>"Black Roads", "definition"=>array(
     array("featureType"=>"all", "stylers"=>array(array("saturation"=>"-70"))),
-    array("featureType"=>"road.arterial", "elementType"=>"geometry", "stylers"=>array(array("hue"=>"#000000")))
+    array("featureType"=>"road.arterial", "elementType"=>"geometry", "stylers"=>array(array("hue"=>"#049BA9")))
   )),
   array("name"=>"No Businesses", "definition"=>array(
     array("featureType"=>"poi.business", "elementType"=>"labels", "stylers"=>array(array("visibility"=>"off")))
