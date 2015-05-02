@@ -1,4 +1,4 @@
- <?php
+<?php
 
     session_start();
       
@@ -31,12 +31,10 @@
         $_SESSION["Password"] = $password;
         $_SESSION["Session"]  = $session;
     }
-
     
     function set_session_status($status) {
         $_SESSION["Status"]   = $status;   
     }
-
 
     function get_session_status() {
         $status = $_SESSION["Status"];
@@ -84,26 +82,6 @@
         disconnect($conn);
         return $x;
     }
-    
-    function check_password($mail,$password) {
-        $conn = connect();
-        $query  = "SELECT mail,password FROM users";
-        $result = $conn->query($query);
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                if ($row["mail"] == $mail) {
-                    if ($row[password] == $password) {
-                        mysqli_free_result($result);
-                        disconnect($conn);
-                        return 1;   
-                    }
-                }
-            }  
-        }
-        mysqli_free_result($result);
-        disconnect($conn);
-        return 0;
-    }
 
     function test_passwords($password1,$password2) {
         if ($password1 != $password2) {
@@ -114,6 +92,26 @@
             return 1;
         }    
     }
+    
+    function check_password($mail,$password) {
+        $conn = connect();
+        $query  = "SELECT mail,password FROM users";
+        $result = $conn->query($query);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                if ($row["mail"] == $mail) {
+                    if ($row["password"] == $password) {
+                        mysqli_free_result($result);
+                        disconnect($conn);
+                        return 1;   
+                    }
+                }
+            }
+        }
+        mysqli_free_result($result);
+        disconnect($conn);
+        return 0;
+    }  
 
     function add_user($name, $mail, $password) {
         $conn  = connect();
@@ -202,12 +200,12 @@
         
         if (get_session_status() == "success") {
             if (add_user($name, $mail, $password) == 1) {
-                header('Location: index.php');
+                header('Location: map');
             } else {
-                header('Location: register.php');
+                header('Location: register');
             }
         } else {
-            header('Location: register.php');
+            header('Location: register');
         }
     }
 
@@ -215,6 +213,8 @@
     if ((isset($_POST['add'])) && ($_POST['add'] == 'Login')) {
        
         set_session_status("success");
+        
+        $mail  = test_input($_POST["mail"]);
         
         if (empty($_POST["password"])) {
             set_session_status("failed");
@@ -229,7 +229,6 @@
         if (empty($_POST["mail"])) {
             set_session_status("failed");
         } else {
-            $mail  = test_input($_POST["mail"]);
             if (check_mail($mail) == 1) {
                 set_session_error("<br><br> Error: The email provided is not registered.");
                 set_session_status("failed");
@@ -239,13 +238,14 @@
         
         if (get_session_status() == "success") {
             if (test_login($mail,$password) == 1) {
-                header('Location: index.php');   
+                header('Location: map');   
             } else {
-                header('Location: login.php');
+                header('Location: login');
             }
-        } else {
-            header('Location: login.php');
+        } else {        
+            header('Location: login');
         }
         
     }
+
 ?>

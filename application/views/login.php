@@ -1,6 +1,15 @@
 
 <?php
 	include_once("util.php");
+
+    if (isset($_SESSION["Session"])) {
+        header("HTTP/1.0 404 Not Found");
+        echo "<br>";
+        echo "<h1>Error 404: Not Found</h1>";
+        echo "<br>";
+        echo "<i>The requested URL was not found on this server, please go back and end the current session. </i> <br>";
+        die();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -17,8 +26,8 @@
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     </head>
 
-    <body background="images/background.jpg">
-        
+    <body background="../../images/background.jpg">
+    
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -27,13 +36,20 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span> 
                     </button>
-                    <a class="navbar-brand" href="index.php">QPET</a>
+                    <?php $this->load->helper('url');?>
+                    <a href="<?= base_url().'index.php/Welcome/index'?>" class="navbar-brand" role="button">QPET</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="index.php">Home</a></li>
-                        <li><a href="login.php">    Login</a></li>
-                        <li><a href="register.php"> Register</a></li>
+                        <?php $this->load->helper('url');?>
+                        <li class="active">
+                            <a href="<?= base_url().'index.php/Welcome/index'?>" role="button">Home</a>
+
+                        </li> 
+                        <?php $this->load->helper('url');?>
+                        <li>
+                            <a href="<?= base_url().'index.php/Welcome/register'?>" role="button">Register</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -48,16 +64,20 @@
             
             <div class="well" align="center">
                 </br>
-                <p>Insert your personal data to create a new profile</p>
+                <p>Fill the spaces to start</p>
                 <br>
-                <br>
-                <form class="block-form" method="post" action="util.php">
-                    <input type="text"      name="name"             placeholder="Name"            id="name" required/>
-                    <input type="text"      name="mail"             placeholder="E-Mail"            id="mail" required/>
-                    <input type="password"  name="password"         placeholder="Password"          id="password" required/>
-                    <input type="password"  name="checkPassword"    placeholder="Repeat password"   id="CheckPassword" required/>
+                <!--
+                <form      class="block-form"              method="post"          action="util.php">
+                -->
+                <?php $this->load->helper('url');?>
+                <form      class="block-form"              method="post"          action="<?= base_url().'index.php/Welcome/util'?>">
+                    <input type="text"     name="mail"     placeholder="E-mail"   id="mail"       required/>
+                    <br>
+                    <br>
+                    <input type="password" name="password" placeholder="Password" id="password"   required/>
+                    <br>
                     <?php 
-                        if (isset($_SESSION["Error"])) {
+                        if (isset($_SESSION["Error"])){
                             echo $_SESSION["Error"]; 
                             $_SESSION["Error"] = "";
                         }
@@ -65,9 +85,7 @@
                     <br>
                     <br>
                     <br>
-                    <br>
-                    <input type="submit" class="login centered-button" name="add" value="Register"/>
-                    </br>
+                    <input type="submit" class="login centered-button" name="add" value="Login"/>
                 </form>
             </div> 
             
