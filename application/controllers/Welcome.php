@@ -90,9 +90,9 @@ class Welcome extends CI_Controller {
     array("featureType"=>"poi.business", "elementType"=>"labels", "stylers"=>array(array("visibility"=>"off")))
   ))
 );
-$config['stylesAsMapTypes'] = true;
-$config['stylesAsMapTypesDefault'] = "Black Roads"; 
-$this->googlemaps->initialize($config);
+        $config['stylesAsMapTypes'] = true;
+        $config['stylesAsMapTypesDefault'] = "Black Roads"; 
+        $this->googlemaps->initialize($config);
         $data["map"] = $this->googlemaps->create_map();
 
       $this->load->view("geolocation", $data);
