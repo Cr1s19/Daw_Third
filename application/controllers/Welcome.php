@@ -67,7 +67,24 @@ class Welcome extends CI_Controller {
       // once we know the users location
       $marker = array();
       $this->googlemaps->add_marker($marker);
-      $data["map"] = $this->googlemaps->create_map();
+      
+      $config["styles"] = array(
+    array("name"=>"Red Parks", "definition"=>array(
+    array("featureType"=>"all", "stylers"=>array(array("saturation"=>"-30"))),
+    array("featureType"=>"poi.park", "stylers"=>array(array("saturation"=>"10"), array("hue"=>"#990000")))
+  )),
+  array("name"=>"Black Roads", "definition"=>array(
+    array("featureType"=>"all", "stylers"=>array(array("saturation"=>"-70"))),
+    array("featureType"=>"road.arterial", "elementType"=>"geometry", "stylers"=>array(array("hue"=>"#000000")))
+  )),
+  array("name"=>"No Businesses", "definition"=>array(
+    array("featureType"=>"poi.business", "elementType"=>"labels", "stylers"=>array(array("visibility"=>"off")))
+  ))
+);
+$config['stylesAsMapTypes'] = true;
+$config['stylesAsMapTypesDefault'] = "Black Roads"; 
+$this->googlemaps->initialize($config);
+        $data["map"] = $this->googlemaps->create_map();
 
       $this->load->view("geolocation", $data);
      }
