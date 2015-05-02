@@ -20,11 +20,11 @@ class Welcome extends CI_Controller {
 	 */
     public function marker(){
         $this->load->library("googlemaps");
-        $config["center"] = "37.4419, -122.1419";
+        $config["center"] = "20.596202, -100.403871";
         $config["zoom"] = "auto";
         $this->googlemaps->initialize($config);
         $marker = array();
-        $marker["position"] = "37.429, -122.1419";
+        $marker["position"] = "20.596202, -100.403871";
         $this->googlemaps->add_marker($marker);
         $data["map"] = $this->googlemaps->create_map();
         $this->load->view("marker", $data);
@@ -33,10 +33,11 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('welcome_message');
 	}
+    
     public function directions()
     {
      $this->load->library("googlemaps");
-     $config["center"] = "37.4419, -122.1419";
+     $config["center"] = "20.596202, -100.403871";
      $config["zoom"] = "auto";
      $config["directions"] = TRUE;
      $config["directionsStart"] = "empire state building";
@@ -71,4 +72,21 @@ class Welcome extends CI_Controller {
 
       $this->load->view("geolocation", $data);
      }
+    
+    public function Nuevos_Huertos()
+    {
+        $this->load->library('googlemaps');
+        $config['center'] = '20.596202, -100.403871';
+        $config['zoom'] = 'auto';
+        $this->googlemaps->initialize($config);
+
+        $marker = array();
+        $marker['position'] = '37.429, -122.1419';
+        $marker['draggable'] = true;
+        $marker['ondragend'] = 'updateDatabase(event.latLng.lat(), event.latLng.lng());';
+        $this->googlemaps->add_marker($marker);
+        $data['map'] = $this->googlemaps->create_map();
+
+        $this->load->view('view_file', $data);
+    }
 }
