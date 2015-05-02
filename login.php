@@ -1,5 +1,6 @@
+
 <?php
-    session_start();
+	include_once("util.php");
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +47,26 @@
             </div>
             
             <div class="well" align="center">
-                Esta es una página de prueba.
+                </br>
+                <p>Fill the spaces to start</p>
+                <br>
+                <form      class="block-form"              method="post"          action="util.php">
+                    <input type="text"     name="mail"     placeholder="E-mail"   id="mail"       required/>
+                    <br>
+                    <br>
+                    <input type="password" name="password" placeholder="Password" id="password"   required/>
+                    <br>
+                    <?php 
+                        if (isset($_SESSION["Error"])){
+                            echo $_SESSION["Error"]; 
+                            $_SESSION["Error"] = "";
+                        }
+                    ?>
+                    <br>
+                    <br>
+                    <br>
+                    <input type="submit" class="login centered-button" name="add" value="Login"/>
+                </form>
             </div> 
             
         </div>

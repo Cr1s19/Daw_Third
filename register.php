@@ -1,5 +1,6 @@
+
 <?php
-    session_start();
+	include_once("util.php");
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +47,28 @@
             </div>
             
             <div class="well" align="center">
-                Esta es una página de prueba.
+                </br>
+                <p>Insert your personal data to create a new profile</p>
+                <br>
+                <br>
+                <form class="block-form" method="post" action="util.php">
+                    <input type="text"      name="name"             placeholder="Name"            id="name" required/>
+                    <input type="text"      name="mail"             placeholder="E-Mail"            id="mail" required/>
+                    <input type="password"  name="password"         placeholder="Password"          id="password" required/>
+                    <input type="password"  name="checkPassword"    placeholder="Repeat password"   id="CheckPassword" required/>
+                    <?php 
+                        if (isset($_SESSION["Error"])) {
+                            echo $_SESSION["Error"]; 
+                            $_SESSION["Error"] = "";
+                        }
+                    ?>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <input type="submit" class="login centered-button" name="add" value="Register"/>
+                    </br>
+                </form>
             </div> 
             
         </div>
