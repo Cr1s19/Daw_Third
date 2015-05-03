@@ -41,7 +41,7 @@
         }
         */
         // Stashed changes
-        public function map()       {
+        public function map(){
             $this->load->library("googlemaps");
 
             $config = array();
@@ -58,6 +58,8 @@
             // set up the marker ready for positioning 
             // once we know the users location
             $marker = array();
+            $marker['icon'] = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=A|9999FF|000000';
+            $marker['infowindow_content'] = 'Tu ubicación actual';
             $this->googlemaps->add_marker($marker);
 
             $config["styles"] = array(
@@ -73,8 +75,30 @@
             $config['stylesAsMapTypes'] = true;
             $config['stylesAsMapTypesDefault'] = "Black Roads"; 
             $this->googlemaps->initialize($config);
+            
+            
+            $marker = array();
+            $marker['position'] = '20.619586, -100.389526';
+            $marker['infowindow_content'] = 'Asunción Fernández Meléndez #243, Querétaro (ciudad) - Querétaro';
+            $this->googlemaps->add_marker($marker);
+            
+            $marker = array();
+            $marker['position'] = '20.574949, -100.372220';
+            $marker['infowindow_content'] = 'Anillo Vial Fray Junípero Serra #9576. Detrás del Fracc. El Refugio, Querétaro (ciudad) - Querétaro';
+            $this->googlemaps->add_marker($marker);
+            
+            $marker = array();
+            $marker['position'] = '20.5958596, -100.4082444';
+            $marker['infowindow_content'] = 'Universidad 3, Centro Universitario (U.a.q.), Santiago de Querétaro, Qro.';
+            $this->googlemaps->add_marker($marker);
+            
+            $marker = array();
+            $marker['position'] = '20.5690070, -100.3768229';
+            $marker['infowindow_content'] = 'Islas Aleutianas #148-1. Col. Loma Linda, Querétaro, Querétaro';
+            $this->googlemaps->add_marker($marker);
+            
+            
             $data["map"] = $this->googlemaps->create_map();
-
             $this->load->view("map", $data);
          }
 
@@ -89,6 +113,8 @@
             $marker['draggable'] = true;
             $marker['ondragend'] = 'updateDatabase(event.latLng.lat(), event.latLng.lng());';
             $this->googlemaps->add_marker($marker);
+            
+            
             $data['map'] = $this->googlemaps->create_map();
 
             $this->load->view('view_file', $data);
