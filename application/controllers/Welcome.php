@@ -105,7 +105,6 @@
             centreGot = true;";
             $this->googlemaps->initialize($config);
 
-<<<<<<< Updated upstream
             // set up the marker ready for positioning 
             // once we know the users location
             $marker = array();
@@ -152,7 +151,6 @@
             $data["map"] = $this->googlemaps->create_map();
             $this->load->view("map", $data);
          }
-=======
       $config = array();
       $config['center'] = 'auto';
       $config['onboundschanged'] = 'if (!centreGot) {
@@ -186,7 +184,6 @@
         $config['stylesAsMapTypesDefault'] = "Black Roads"; 
         $this->googlemaps->initialize($config);
         $data["map"] = $this->googlemaps->create_map();
->>>>>>> Stashed changes
 
         public function Nuevos_Huertos(){
             $this->load->library('googlemaps');
