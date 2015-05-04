@@ -97,7 +97,6 @@
             $marker['infowindow_content'] = 'Islas Aleutianas #148-1. Col. Loma Linda, Querétaro, Querétaro';
             $this->googlemaps->add_marker($marker);
             
-            
             $data["map"] = $this->googlemaps->create_map();
             $this->load->view("map", $data);
          }
